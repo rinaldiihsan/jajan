@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProductCards from './_components/ProductCards';
+import CategoryCards from './_components/CategoryCards';
 
 export default function page() {
   return (
@@ -33,6 +34,17 @@ export default function page() {
           </div>
           {/* Card */}
           <ProductCards />
+        </div>
+      </section>
+
+      {/* Section 3 */}
+      <section className="w-full py-[50px] md:py-[100px] flex flex-col">
+        <div className="container flex flex-col gap-y-14 items-center justify-center">
+          <div className="relative w-full h-[70vh] flex bg-[url('/images/category-homepage.png')] bg-cover bg-center bg-no-repeat justify-center items-center overflow-x-hidden rounded-[20px]">
+            <h1 className="text-center text-white text-4xl md:text-5xl lg:text-6xl uppercase font-extrabold">beraneka ragam kategori</h1>
+          </div>
+          {/* Card */}
+          <CategoryCards />
         </div>
       </section>
     </>

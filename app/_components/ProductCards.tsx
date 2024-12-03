@@ -2,15 +2,15 @@
 
 import React from 'react';
 import Image from 'next/image';
-import DummyProduct from '@/assets/user/dummy-product.png';
 import Link from 'next/link';
+import DummyProduct from '@/assets/user/dummy-product.png';
 
 export default function ProductCards() {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
         {[1, 2, 3, 4, 5, 6].map((item) => (
-          <Link href="/" key={item} className="relative w-[350px] h-[350px] rounded-[20px] overflow-hidden group">
+          <Link href="/" key={item} className="relative md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] rounded-[20px] overflow-hidden group">
             {/* Image */}
             <Image src={DummyProduct} alt="Kopi Gula Aren" className="w-full h-full object-cover" />
 
