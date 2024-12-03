@@ -35,7 +35,7 @@ export default function Navbars() {
         {matches && (
           <div className="flex gap-x-12 justify-between items-center w-full">
             <div className="flex flex-row gap-x-12">
-              <Link href="/kontak" className="text-white text-lg">
+              <Link href="/" className="text-white text-lg">
                 Kontak
               </Link>
               <Link href="/tentang" className="text-white text-lg">

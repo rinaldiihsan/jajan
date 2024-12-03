@@ -7,7 +7,7 @@ import DummyProduct from '@/assets/user/dummy-product.png';
 
 export default function ProductCards() {
   return (
-    <div className="flex flex-col items-center justify-center w-full">
+    <div className="flex flex-col items-center justify-center w-full gap-y-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
         {[1, 2, 3, 4, 5, 6].map((item) => (
           <Link href="/" key={item} className="relative md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] rounded-[20px] overflow-hidden group">
@@ -24,6 +24,16 @@ export default function ProductCards() {
             </div>
           </Link>
         ))}
+      </div>
+
+      {/* Button Telusuri */}
+      <div className="flex justify-center items-center">
+        <Link
+          href="/belanja"
+          className="flex justify-center items-center gap-x-3 bg-transparent text-[#54473F] px-6 py-5 text-base md:text-lg capitalize border-2 border-[#54473F] rounded-full hover:bg-[#54473F] hover:text-white transition-colors duration-300"
+        >
+          telusuri produk lainnya
+        </Link>
       </div>
     </div>
   );
