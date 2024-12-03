@@ -1,7 +1,5 @@
-import type { Metadata } from 'next';
 import './globals.css';
-import Navbar from '@/components/Layouts/Navbars/Navbars';
-import Footer from '@/components/Layouts/Footer/Footer';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Jajan',
@@ -15,11 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        <main className="flex flex-col min-h-screen overflow-x-hidden">{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
