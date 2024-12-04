@@ -11,7 +11,7 @@ export default function CategoryCards() {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
-        <Link href="/" className="relative md:w-[350px] md:h-[400px] lg:w-[450px] lg:h-[500px] rounded-[20px] overflow-hidden group">
+        <Link href="/belanja#minuman-kopi" className="relative md:w-[350px] md:h-[400px] lg:w-[450px] lg:h-[500px] rounded-[20px] overflow-hidden group">
           {/* Image */}
           <Image src={CategoryKopi} alt="Kopi" className="w-full h-full object-cover" />
 
@@ -20,7 +20,7 @@ export default function CategoryCards() {
             <h3 className="text-2xl font-semibold mb-2">Kopi</h3>
           </div>
         </Link>
-        <Link href="/" className="relative md:w-[350px] md:h-[400px] lg:w-[450px] lg:h-[500px] rounded-[20px] overflow-hidden group">
+        <Link href="/belanja#minuman-nonkopi" className="relative md:w-[350px] md:h-[400px] lg:w-[450px] lg:h-[500px] rounded-[20px] overflow-hidden group">
           {/* Image */}
           <Image src={CategoryNonKopi} alt="Non-Kopi" className="w-full h-full object-cover" />
 
@@ -29,7 +29,7 @@ export default function CategoryCards() {
             <h3 className="text-2xl font-semibold mb-2">Non-Kopi</h3>
           </div>
         </Link>
-        <Link href="/" className="relative md:w-[350px] md:h-[400px] lg:w-[450px] lg:h-[500px] rounded-[20px] overflow-hidden group">
+        <Link href="belanja#minuman-teh" className="relative md:w-[350px] md:h-[400px] lg:w-[450px] lg:h-[500px] rounded-[20px] overflow-hidden group">
           {/* Image */}
           <Image src={CategoryTea} alt="Teh" className="w-full h-full object-cover" />
 
