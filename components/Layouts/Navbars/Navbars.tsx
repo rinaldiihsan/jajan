@@ -4,16 +4,15 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useMediaQuery } from 'usehooks-ts';
-import { AnimatePresence, motion } from 'framer-motion';
 import Logo from '@/assets/user/logo.png';
-import { User, LogOut, ShoppingBag } from 'lucide-react';
+import { User, LogOut, ShoppingBag, User2Icon } from 'lucide-react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 export default function Navbars() {
   const [toggle, setToggle] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
   const matches = useMediaQuery('(min-width: 1024px)');
   const [isClient, setIsClient] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +25,6 @@ export default function Navbars() {
       setToggle(false);
     }
     setIsClient(true);
-    // Check if user is logged in and get username
     const token = Cookies.get('accessToken');
     const storedUsername = Cookies.get('userName');
     setIsLoggedIn(!!token);
@@ -39,7 +37,6 @@ export default function Navbars() {
     Cookies.remove('accessToken');
     Cookies.remove('userName');
     setIsLoggedIn(false);
-    setShowDropdown(false);
     toast({
       title: 'Berhasil Logout',
       description: 'Sampai jumpa kembali!',
@@ -81,24 +78,31 @@ export default function Navbars() {
                 Belanja
               </Link>
               {isLoggedIn ? (
-                <div className="relative">
-                  <button onClick={() => setShowDropdown(!showDropdown)} className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#9F6744] p-2 rounded-full transition-colors flex items-center gap-2">
-                    <User size={24} />
-                  </button>
-
-                  {showDropdown && (
-                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute mt-2 w-48 rounded-xl bg-white shadow-lg py-2 border border-[#9F6744]/20">
-                      <Link href="/orders" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-[#FDF8F3]">
-                        <ShoppingBag size={16} className="mr-2" />
-                        Orderan
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#9F6744] p-2 rounded-full transition-colors flex items-center gap-2">
+                      <User size={24} />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-48 mt-4" align="center">
+                    <DropdownMenuItem asChild>
+                      <Link href="/user" className="flex items-center cursor-pointer">
+                        <User2Icon size={16} className="mr-2" />
+                        <span>Detail User</span>
                       </Link>
-                      <button onClick={handleLogout} className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-[#FDF8F3]">
-                        <LogOut size={16} className="mr-2" />
-                        Logout
-                      </button>
-                    </motion.div>
-                  )}
-                </div>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/orders" className="flex items-center cursor-pointer">
+                        <ShoppingBag size={16} className="mr-2" />
+                        <span>Orderan</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600 focus:bg-red-50">
+                      <LogOut size={16} className="mr-2" />
+                      <span>Logout</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <Link href="/login" className="text-white text-lg">
                   Login
