@@ -6,6 +6,8 @@ import { useParams } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Minus, Plus, ShoppingCart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface ProductDetail {
   id: number;
@@ -31,6 +33,7 @@ export default function page() {
   const [product, setProduct] = useState<ProductDetail | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -71,6 +74,17 @@ export default function page() {
     minimumFractionDigits: 0,
   });
 
+  const handleOrder = () => {
+    localStorage.setItem(
+      'selectedProduct',
+      JSON.stringify({
+        ...product,
+        quantity: quantity,
+      })
+    );
+    router.push('/order');
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#9F6744] flex items-center justify-center">
@@ -97,7 +111,7 @@ export default function page() {
                 <span className="inline-block px-3 py-1 bg-[#9F6744]/10 text-[#9F6744] rounded-full text-sm mb-4">{product.category_name}</span>
                 <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 uppercase">{product.name}</h1>
                 <p className="text-2xl font-semibold text-[#9F6744] mb-6">{priceFormatter.format(product.price)}</p>
-                <p className="text-gray-600 mb-8">{product.description}</p>
+                <p className="text-gray-600 mb-2  ">{product.description}</p>
                 <div className="mb-8">
                   <p className="text-sm text-gray-500 mb-2">Stock tersedia: {product.stock}</p>
                   <div className="flex items-center gap-4">
@@ -112,9 +126,9 @@ export default function page() {
                 </div>
               </div>
 
-              <Button className="w-full bg-[#9F6744] hover:bg-[#8A583A] text-white py-7 rounded-full flex items-center justify-center gap-2">
+              <Button onClick={handleOrder} className="w-full bg-[#9F6744] hover:bg-[#8A583A] text-white py-7 rounded-full flex items-center justify-center gap-2">
                 <ShoppingCart className="w-5 h-5" />
-                Tambah ke Keranjang
+                Order Sekarang
               </Button>
             </div>
           </div>

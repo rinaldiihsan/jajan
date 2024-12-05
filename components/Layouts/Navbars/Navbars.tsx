@@ -92,7 +92,7 @@ export default function Navbars() {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/orders" className="flex items-center cursor-pointer">
+                      <Link href="/order/orderan" className="flex items-center cursor-pointer">
                         <ShoppingBag size={16} className="mr-2" />
                         <span>Orderan</span>
                       </Link>
