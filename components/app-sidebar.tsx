@@ -85,14 +85,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: 'Semua Pesanan',
             url: '/admin/orders',
           },
-          {
-            title: 'Pesanan Pending',
-            url: '/admin/orders?status=pending',
-          },
-          {
-            title: 'Pesanan Selesai',
-            url: '/admin/orders?status=completed',
-          },
         ],
       },
     ],
