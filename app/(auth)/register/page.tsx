@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Mail, Lock, Coffee, User } from 'lucide-react';
+import { Mail, Lock, Coffee, User, Phone } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 
@@ -14,6 +14,7 @@ export default function Register() {
     email: '',
     password: '',
     full_name: '',
+    phone: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,6 +121,24 @@ export default function Register() {
                   required
                   className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]"
                   placeholder="Masukkan email"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-[#5B5B5B]" htmlFor="phone">
+                No. Telepon
+              </label>
+              <div className="mt-1 relative">
+                <Phone className="absolute top-4 left-3 h-5 w-5 text-[#9F6744]" />
+                <input
+                  id="phone"
+                  type="text"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]"
+                  placeholder="Masukkan no. telepon"
                 />
               </div>
             </div>
