@@ -5,6 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product, ApiResponse } from '@/app/@types/ProductResponse';
 
+const createSlug = (name: string): string => {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+};
+
 export default function ProductCards() {
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -35,7 +43,7 @@ export default function ProductCards() {
     <div className="flex flex-col items-center justify-center w-full gap-y-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
         {products.map((product) => (
-          <Link href={`/belanja/${product.id}`} key={product.id} className="relative md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] rounded-[20px] overflow-hidden group">
+          <Link href={`/belanja/${createSlug(product.name)}-${product.id}`} key={product.id} className="relative md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] rounded-[20px] overflow-hidden group">
             <Image src={product.image_url} alt={product.name} width={450} height={450} className="w-full h-full object-cover" />
 
             <div className="absolute inset-0 bg-gradient-to-t from-[#9F6744] to-transparent opacity-70" />

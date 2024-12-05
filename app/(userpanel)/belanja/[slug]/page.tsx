@@ -34,8 +34,11 @@ export default function page() {
 
   useEffect(() => {
     const fetchProduct = async () => {
+      // Extract ID from slug (format: product-name-123)
+      const productId = params.slug.toString().split('-').pop();
+
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/products/${params.slug}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/products/${productId}`);
         const data: ApiResponse = await response.json();
         if (data.status === 'success') {
           setProduct(data.data);
