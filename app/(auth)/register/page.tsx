@@ -1,8 +1,64 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Mail, Lock, Coffee, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Register() {
+  const { toast } = useToast();
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    full_name: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.status === 'success') {
+        toast({
+          title: 'Berhasil!',
+          description: 'Akun berhasil dibuat. Silahkan login.',
+        });
+        router.push('/login');
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Error!',
+          description: data.message || 'Terjadi kesalahan saat mendaftar.',
+        });
+      }
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error!',
+        description: 'Terjadi kesalahan saat mendaftar.',
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FDF8F3] px-3 md:px-0">
       <div className="max-w-md w-full p-8 bg-white rounded-3xl shadow-xl border border-[#9F6744]/20">
@@ -12,7 +68,7 @@ export default function Register() {
           <p className="text-sm text-[#5B5B5B]">Buat akun Jajan kamu sekarang</p>
         </div>
 
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
             <div>
               <label className="text-sm font-medium text-[#5B5B5B]" htmlFor="username">
@@ -20,17 +76,33 @@ export default function Register() {
               </label>
               <div className="mt-1 relative">
                 <User className="absolute top-4 left-3 h-5 w-5 text-[#9F6744]" />
-                <input id="username" type="text" required className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]" placeholder="Masukkan username" />
+                <input
+                  id="username"
+                  type="text"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                  className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]"
+                  placeholder="Masukkan username"
+                />
               </div>
             </div>
 
             <div>
-              <label className="text-sm font-medium text-[#5B5B5B]" htmlFor="fullName">
+              <label className="text-sm font-medium text-[#5B5B5B]" htmlFor="full_name">
                 Nama Lengkap
               </label>
               <div className="mt-1 relative">
                 <User className="absolute top-4 left-3 h-5 w-5 text-[#9F6744]" />
-                <input id="fullName" type="text" required className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]" placeholder="Masukkan nama lengkap" />
+                <input
+                  id="full_name"
+                  type="text"
+                  value={formData.full_name}
+                  onChange={handleChange}
+                  required
+                  className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]"
+                  placeholder="Masukkan nama lengkap"
+                />
               </div>
             </div>
 
@@ -40,7 +112,15 @@ export default function Register() {
               </label>
               <div className="mt-1 relative">
                 <Mail className="absolute top-4 left-3 h-5 w-5 text-[#9F6744]" />
-                <input id="email" type="email" required className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]" placeholder="Masukkan email" />
+                <input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]"
+                  placeholder="Masukkan email"
+                />
               </div>
             </div>
 
@@ -50,7 +130,15 @@ export default function Register() {
               </label>
               <div className="mt-1 relative">
                 <Lock className="absolute top-4 left-3 h-5 w-5 text-[#9F6744]" />
-                <input id="password" type="password" required className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]" placeholder="Masukkan kata sandi" />
+                <input
+                  id="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="pl-10 w-full py-3 border-2 border-[#9F6744]/20 rounded-xl focus:ring-2 focus:ring-[#9F6744] focus:border-transparent bg-[#FDF8F3]"
+                  placeholder="Masukkan kata sandi"
+                />
               </div>
             </div>
           </div>
