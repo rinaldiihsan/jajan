@@ -29,11 +29,3 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
-
-::-webkit-scrollbar {
-  width: 9px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #e2e8f0;
-}
